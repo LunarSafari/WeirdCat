@@ -1,12 +1,13 @@
 import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import {Container, Header, Segment, Button, Divider, Modal, Form} from 'semantic-ui-react'
+import {Container, Header, Segment, Button, Divider, Modal, Form, Accordion, Icon} from 'semantic-ui-react'
 
 export default class ConceptCard extends React.Component{
 	static propTypes = {
 		name: PropTypes.string.isRequired,
 		alias: PropTypes.string,
-		description: PropTypes.string
+		description: PropTypes.string,
+		aspects: PropTypes.array
 	}
 
 	state = {
@@ -14,7 +15,8 @@ export default class ConceptCard extends React.Component{
 		isSubmitting: false,
 		name: this.props.name,
 		alias: this.props.alias,
-		description: this.props.description
+		description: this.props.description,
+		aspects: this.props.aspects
 	}
 
 	edit(){
@@ -33,16 +35,32 @@ export default class ConceptCard extends React.Component{
 	render(){
 		return <Container>
 			<Segment>
-				<Button basic icon="write" floated="right" circular onClick={::this.edit} />
 				<Header as='h2' floated="left">
 					{this.state.name}
-					<Header.Subheader>Alias: {this.state.alias}</Header.Subheader>
+					{do{
+						if(this.state.alias.length > 0){
+							<Header.Subheader>Alias: {this.state.alias}</Header.Subheader>
+						}
+					}}
 				</Header>
+				<Button basic icon="remove" floated="right" circular onClick={::this.edit} />
+				<Button basic icon="write" floated="right" circular onClick={::this.edit} />
 				<Divider clearing/>
 				<p>
 					{this.state.description}
 				</p>
 			</Segment>
+			<Accordion styled fluid>
+				{this.state.aspects.map(a => [
+					<Accordion.Title as="h2">
+						<Icon name="dropdown"/>
+						{a.name}
+						<Button basic icon="remove" size="mini" floated="right" onClick={::this.edit} />
+						<Button basic icon="write" size="mini" floated="right" onClick={::this.edit} />
+					</Accordion.Title>,
+					<Accordion.Content>{a.description}</Accordion.Content>
+				])}
+			</Accordion>
 			<Modal open={this.state.isEditing}>
 				<Modal.Header>Edit Concept</Modal.Header>
 				<Modal.Content>
