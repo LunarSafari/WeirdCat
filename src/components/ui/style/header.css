@@ -1,3 +1,9 @@
-.header {
-	margin: 0 0 .5em 0;
+.title {
+	margin: 0;
+	font-size: 30px;
+}
+
+.subtitle {
+	margin: 6px 0 0 0;
+	color: rgba(0,0,0,.6);
 }

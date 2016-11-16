@@ -6,19 +6,26 @@ import style from './style/section.css'
 export default class Section extends React.PureComponent{
 
 	static propTypes = {
-		editable: PropTypes.boolean,
-		deletable: PropTypes.boolean
+		editable: PropTypes.bool,
+		deletable: PropTypes.bool,
+		onEdit: PropTypes.func,
+		onDelete: PropTypes.func
 	}
 
 	render(){
 		return <section className={style.section}>
-			{do{
-				if(this.props.editable){
-					<a style={{
-						float: 'right'
-					}}>Edit</a>
-				}
-			}}
+			<div className={style.tools}>
+				{do{
+					if(this.props.editable){
+						<i className={cn(style.edit, style.icon)} onClick={this.props.onEdit}></i>
+					}
+				}}
+				{do{
+					if(this.props.deletable){
+						<i className={cn(style.delete, style.icon)} onClick={this.props.onDelete}></i>
+					}
+				}}
+			</div>
 			{this.props.children}
 		</section>
 	}

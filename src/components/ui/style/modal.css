@@ -1,0 +1,21 @@
+.dimmer {
+	background-color: rgba(0,0,0,.8);
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+}
+
+.modal {
+	width: 950px;
+	position: static;
+	margin: 3rem auto 0;
+	z-index: 1001;
+	text-align: left;
+	background: #FFF;
+	border: none;
+	box-shadow: 1px 3px 3px 0 rgba(0,0,0,.2),1px 3px 15px 2px rgba(0,0,0,.2);
+	border-radius: .28571429rem;
+	padding: 1rem;
+}

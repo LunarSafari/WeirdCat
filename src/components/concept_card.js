@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import {Container, Header, Segment, Button, Divider, Modal, Form, Accordion, Icon} from 'semantic-ui-react'
+import {Container,Segment, Divider, Form, Accordion, Icon} from 'semantic-ui-react'
+import {Page, Section, Header, Expandable, Modal, Button} from './ui'
 
 export default class ConceptCard extends React.Component{
 	static propTypes = {
@@ -33,45 +34,22 @@ export default class ConceptCard extends React.Component{
 	}
 
 	render(){
-		return <Container>
-			<Segment>
-				<Header as='h2' floated="left">
-					{this.state.name}
-					{do{
-						if(this.state.alias.length > 0){
-							<Header.Subheader>Alias: {this.state.alias}</Header.Subheader>
-						}
-					}}
-				</Header>
-				<Button basic icon="remove" floated="right" circular onClick={::this.edit} />
-				<Button basic icon="write" floated="right" circular onClick={::this.edit} />
-				<Divider clearing/>
-				<p>
-					{this.state.description}
-				</p>
-			</Segment>
-			<Accordion styled fluid>
-				{this.state.aspects.map(a => [
-					<Accordion.Title as="h2">
-						<Icon name="dropdown"/>
-						{a.name}
-						<Button basic icon="remove" size="mini" floated="right" onClick={::this.edit} />
-						<Button basic icon="write" size="mini" floated="right" onClick={::this.edit} />
-					</Accordion.Title>,
-					<Accordion.Content>{a.description}</Accordion.Content>
-				])}
-			</Accordion>
-			<Modal open={this.state.isEditing}>
-				<Modal.Header>Edit Concept</Modal.Header>
-				<Modal.Content>
-					<Form onSubmit={::this.save} ref="conceptForm" loading={this.state.isSubmitting}>
-						<Form.Field control={Form.Input} name="name" defaultValue={this.state.name} label="Name" />
-						<Form.Field control={Form.Input} name="alias" defaultValue={this.state.alias} label="Alias (comma for division)" />
-						<Form.Field control={Form.TextArea} name="description" defaultValue={this.state.description} label="Description" />
-						<Form.Field control={Button} primary content="Submit" />
-					</Form>
-				</Modal.Content>
+		var subtitle = this.state.alias && this.state.alias.length > 0 ? `Alias: ${this.state.alias}` : null
+		return <Page>
+			<Section editable deletable onEdit={::this.edit} onDelete={e=>e}>
+				<Header title={this.state.name} subtitle={subtitle}/>
+				<br />
+				{this.state.description}
+			</Section>
+			{this.state.aspects.map(a => do {
+				<Section editable deletable >
+					<Expandable title={a.name} content={a.description} />
+				</Section>
+			})}
+			<Modal opened={true}>
+				<Button color="blue">Save</Button>
+				<Button>Cancel</Button>
 			</Modal>
-		</Container>
+		</Page>
 	}
 }

@@ -15,8 +15,11 @@ export default class Header extends React.PureComponent{
 	}
 
 	render(){
-		return <h2 className={style.header}>
-			{this.props.children}
-		</h2>
+		return <div>
+			<h1 className={style.title}>
+				{this.props.title}
+			</h1>
+			<p className={style.subtitle}>{this.props.subtitle}</p>
+		</div>
 	}
 }

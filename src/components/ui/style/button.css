@@ -14,26 +14,25 @@
     color: rgba(0, 0, 0, .8);
 }
 
-.button:hover {
-	filter: brightness(90%);
-}
+.button:hover { background-color: #CACBCD; }
+.button:active { background-color: #BABBBC; }
 
-.button:active {
-	filter: brightness(80%);
-}
-
-.red    { background-color: #DB2828; }
-.orange { background-color: #F2711C; }
 .yellow { background-color: #FBBD08; }
 .olive  { background-color: #B5CC18; }
 .green  { background-color: #21BA45; }
 .teal   { background-color: #00B5AD; }
 .blue   { background-color: #2185D0; }
-.violet { background-color: #6435C9; }
-.purple { background-color: #A333C8; }
-.pink   { background-color: #E03997; }
-.brown  { background-color: #A5673F; }
-.grep   { background-color: #767676; }
-.black  { background-color: #1B1C1D; }
+
+.yellow:hover { background-color: #eaae00; }
+.olive:hover  { background-color: #a7bd0d; }
+.green:hover  { background-color: #16ab39; }
+.teal:hover   { background-color: #009c95; }
+.blue:hover   { background-color: #1678c2; }
+
+.yellow:active { background-color: #cd9903; }
+.olive:active  { background-color: #8d9e13; }
+.green:active  { background-color: #198f35; }
+.teal:active   { background-color: #00827c; }
+.blue:active   { background-color: #1a69a4; }
 
 .colored { color: #fff; }

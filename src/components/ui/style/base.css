@@ -1,3 +1,6 @@
+html {
+	height: 100%;
+}
 
 body {
 	margin: 0;
@@ -6,4 +9,14 @@ body {
 	color: rgba(0, 0, 0, .87);
 	line-height: 1.4285em;
 	font-size: 14px;
+}
+
+@font-face {
+	font-family: 'Icons';
+	src: url("http://cdn.staticfile.org/semantic-ui/2.2.6/themes/default/assets/fonts/icons.woff") format('woff');
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: inherit;
+	text-transform: none;
 }

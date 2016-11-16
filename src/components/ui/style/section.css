@@ -2,8 +2,44 @@
 	border-top: 1px solid rgba(34,36,38,.15);
 	padding: 1rem 0;
 	overflow: hidden;
+	min-height: 1.5rem;
 }
 
 .section:first-child {
 	border-top: none;
+}
+
+.icon {
+	display: inline-block;
+	opacity: 1;
+	margin: 0 .25rem 0 0;
+	width: 1.18em;
+	height: 1em;
+	font-family: Icons;
+	font-style: normal;
+	font-weight: 400;
+	text-align: center;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.icon:hover {
+	color: #999;
+}
+
+.edit:before {
+	content: "\f040";
+}
+
+.delete:before {
+	content: "\f00d";
+}
+
+.tools {
+	float: right;
+	display: none;
+}
+
+.section:hover .tools {
+	display: block;
 }
