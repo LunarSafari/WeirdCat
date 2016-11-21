@@ -7,14 +7,14 @@ export default class App{
 	post(path, data){
 		return fetch(path, {
 			method: 'POST',
-			body: this.convertObjectToFormData(data)
+			body: data
 		}).then(e => e.json())
 	}
 
 	patch(path, data){
 		return fetch(path, {
 			method: 'PATCH',
-			body: this.convertObjectToFormData(data)
+			body: data
 		}).then(e => e.json())
 	}
 

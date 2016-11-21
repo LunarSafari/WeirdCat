@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
-import {Container,Segment, Divider, Form, Accordion, Icon} from 'semantic-ui-react'
-import {Page, Section, Header, Expandable, Modal, Button} from './ui'
+import {Page, Section, Header, Expandable, Modal, Button, Form} from './ui'
 
 export default class ConceptCard extends React.Component{
 	static propTypes = {
@@ -24,13 +23,20 @@ export default class ConceptCard extends React.Component{
 		this.setState({isEditing: true})
 	}
 
-	save(e, form){
+	save(e){
 		e.preventDefault()
-		app.patch(app.concept_path(1), form).then(e => {
+		var formData = new FormData(e.target)
+		app.patch(app.concept_path(1), formData).then(e => {
 			this.setState({isSubmitting: false, isEditing: false})
-			this.setState(form)
+			app.get(app.concept_path(1)).then(data => {
+				this.setState(data)
+			})
 		})
 		this.setState({isSubmitting: true})
+	}
+
+	handleModalCancel(){
+		this.setState({isEditing: false})
 	}
 
 	render(){
@@ -46,9 +52,14 @@ export default class ConceptCard extends React.Component{
 					<Expandable title={a.name} content={a.description} />
 				</Section>
 			})}
-			<Modal opened={true}>
-				<Button color="blue">Save</Button>
-				<Button>Cancel</Button>
+			<Modal opened={this.state.isEditing}>
+				<Form onSubmit={::this.save}>
+					<Form.TextField name="name" label="Name" defaultValue={this.state.name} />
+					<Form.TextField name="alias" label="Alias(use comma for separation)" defaultValue={this.state.alias} />
+					<Form.TextArea name="description" label="Description" defaultValue={this.state.description}/>
+					<Button color="blue" type="submit">Save</Button>
+					<Button onClick={::this.handleModalCancel}>Cancel</Button>
+				</Form>
 			</Modal>
 		</Page>
 	}

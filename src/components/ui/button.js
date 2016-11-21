@@ -5,7 +5,8 @@ import style from './style/button.css'
 
 export default class Button extends React.PureComponent{
 	static propTypes = {
-		color: PropTypes.string
+		color: PropTypes.string,
+		type: PropTypes.string
 	}
 
 	className(){
@@ -18,7 +19,7 @@ export default class Button extends React.PureComponent{
 	}
 
 	render(){
-		return <button className={this.className()} onClick={this.props.onClick}>
+		return <button className={this.className()} onClick={this.props.onClick} type={this.props.type || 'button'}>
 			{this.props.children}
 		</button>
 	}
