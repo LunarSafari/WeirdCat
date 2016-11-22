@@ -3,5 +3,7 @@ Rails.application.routes.draw do
     resources :concepts do
       resources :aspects
     end
+
+    resources :aspects
   end
 end

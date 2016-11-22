@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import {Page, Section, Header, Expandable, Modal, Button, Form} from './ui'
+import AspectSection from './aspect_section'
 
 export default class ConceptCard extends React.Component{
 	static propTypes = {
@@ -28,9 +29,9 @@ export default class ConceptCard extends React.Component{
 		var formData = new FormData(e.target)
 		app.patch(app.concept_path(1), formData).then(e => {
 			this.setState({isSubmitting: false, isEditing: false})
-			app.get(app.concept_path(1)).then(data => {
-				this.setState(data)
-			})
+			var data = {}
+			formData.kq(Array.from).map(([k,v]) => data[k] = v)
+			this.setState(data)
 		})
 		this.setState({isSubmitting: true})
 	}
@@ -48,9 +49,7 @@ export default class ConceptCard extends React.Component{
 				{this.state.description}
 			</Section>
 			{this.state.aspects.map(a => do {
-				<Section editable deletable >
-					<Expandable title={a.name} content={a.description} />
-				</Section>
+				<AspectSection id={a.id} name={a.name} description={a.description} />
 			})}
 			<Modal opened={this.state.isEditing}>
 				<Form onSubmit={::this.save}>

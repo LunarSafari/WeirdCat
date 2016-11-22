@@ -8,7 +8,8 @@
 }
 
 .modal {
-	width: 950px;
+	max-width: 750px;
+	width: 100%;
 	position: static;
 	margin: 3rem auto 0;
 	z-index: 1001;
@@ -18,4 +19,5 @@
 	box-shadow: 1px 3px 3px 0 rgba(0,0,0,.2),1px 3px 15px 2px rgba(0,0,0,.2);
 	border-radius: .28571429rem;
 	padding: 1rem;
+	box-sizing: border-box;
 }
